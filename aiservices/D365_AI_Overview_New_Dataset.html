@@ -1,0 +1,3003 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamics 365 AI / Analytics Services Overview</title>
+<style>
+:root {
+  --bg:#f5f7fb; --card:#ffffff; --ink:#172033; --muted:#667085; --line:#d9e0ea;
+  --accent:#2563eb; --ok:#0f7b4f; --okbg:#e8f7ef; --off:#667085; --offbg:#eef2f6; --warn:#b45309; --warnbg:#fff4df;
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family: "Segoe UI", Arial, sans-serif; background:var(--bg); color:var(--ink); }
+header { background:linear-gradient(135deg,#0f172a,#1d4ed8); color:white; padding:36px 44px; }
+header h1 { margin:0 0 8px; font-size:30px; }
+header p { margin:0; opacity:.9; max-width:1000px; line-height:1.5; }
+main { padding:28px 44px 44px; }
+.cards { display:grid; grid-template-columns:repeat(5,minmax(150px,1fr)); gap:16px; margin-top:-48px; margin-bottom:24px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 10px 24px rgba(16,24,40,.08); }
+.card .label { color:var(--muted); font-size:13px; }
+.card .num { font-size:34px; font-weight:700; margin-top:8px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:22px; }
+.panel { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 4px 14px rgba(16,24,40,.05); }
+.panel h2 { margin:0 0 14px; font-size:18px; }
+.bar-row { display:grid; grid-template-columns:220px 1fr 36px; gap:12px; align-items:center; margin:10px 0; color:#344054; font-size:14px; }
+.bar { height:10px; background:#edf2f7; border-radius:999px; overflow:hidden; }
+.bar i { display:block; height:100%; background:var(--accent); border-radius:999px; }
+.toolbar { display:flex; gap:12px; align-items:center; margin:18px 0; }
+input, select { border:1px solid var(--line); border-radius:10px; padding:11px 12px; background:white; font:inherit; }
+input { flex:1; min-width:260px; }
+table { width:100%; border-collapse:separate; border-spacing:0; background:white; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 4px 14px rgba(16,24,40,.05); }
+th, td { text-align:left; border-bottom:1px solid var(--line); padding:13px 14px; vertical-align:top; font-size:14px; }
+th { background:#f8fafc; color:#344054; font-size:12px; text-transform:uppercase; letter-spacing:.04em; position:sticky; top:0; z-index:2; }
+tr:last-child td { border-bottom:0; }
+.sub { color:var(--muted); font-size:12px; margin-top:4px; word-break:break-all; }
+.badge { display:inline-flex; padding:5px 9px; border-radius:999px; font-size:12px; font-weight:600; white-space:nowrap; }
+.badge.ok { color:var(--ok); background:var(--okbg); }
+.badge.off { color:var(--off); background:var(--offbg); }
+.badge.warn { color:var(--warn); background:var(--warnbg); }
+details summary { cursor:pointer; color:var(--accent); }
+pre { max-width:620px; max-height:320px; overflow:auto; background:#0b1020; color:#dbeafe; padding:12px; border-radius:10px; font-size:12px; }
+.note { color:var(--muted); font-size:13px; margin-top:8px; }
+@media (max-width:1000px) { .cards,.grid { grid-template-columns:1fr 1fr; } main, header { padding-left:20px; padding-right:20px; } .toolbar { flex-direction:column; align-items:stretch; } }
+@media (max-width:700px) { .cards,.grid { grid-template-columns:1fr; } table { display:block; overflow-x:auto; } }
+@media print { .toolbar, details { display:none; } header { background:#fff; color:#000; padding:10px 0; } main { padding:0; } .cards { margin-top:10px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dynamics 365 AI / Analytics Services Overview</h1>
+  <p>This report summarizes the pasted Dataverse/Dynamics 365 service configuration dataset, including feature names, provisioning status, enabled state, modified dates, and detailed raw metadata for each record.</p>
+</header>
+<main>
+  <section class="cards">
+    <div class="card"><div class="label">Total records</div><div class="num">59</div></div>
+    <div class="card"><div class="label">Unique services</div><div class="num">58</div></div>
+    <div class="card"><div class="label">Enabled</div><div class="num">14</div></div>
+    <div class="card"><div class="label">Disabled</div><div class="num">45</div></div>
+    <div class="card"><div class="label">Duplicate names</div><div class="num">1</div></div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h2>Provisioning status distribution</h2>
+      <div class="bar-row"><span>Not provisioned / off</span><div class="bar"><i style="width:76.3%"></i></div><b>45</b></div><div class="bar-row"><span>Provisioned / ready</span><div class="bar"><i style="width:18.6%"></i></div><b>11</b></div><div class="bar-row"><span>Provisioning in progress / pending</span><div class="bar"><i style="width:3.4%"></i></div><b>2</b></div><div class="bar-row"><span>Provisioning issue</span><div class="bar"><i style="width:1.7%"></i></div><b>1</b></div>
+      <div class="note">Status labels are interpreted from the option-set numeric codes in the dataset.</div>
+    </div>
+    <div class="panel">
+      <h2>Feature categories</h2>
+      <div class="bar-row"><span>Omnichannel</span><div class="bar"><i style="width:47.5%"></i></div><b>28</b></div><div class="bar-row"><span>Forecasting</span><div class="bar"><i style="width:13.6%"></i></div><b>8</b></div><div class="bar-row"><span>Analytics</span><div class="bar"><i style="width:11.9%"></i></div><b>7</b></div><div class="bar-row"><span>Knowledge</span><div class="bar"><i style="width:10.2%"></i></div><b>6</b></div><div class="bar-row"><span>Other</span><div class="bar"><i style="width:6.8%"></i></div><b>4</b></div><div class="bar-row"><span>Quality / QMS</span><div class="bar"><i style="width:5.1%"></i></div><b>3</b></div><div class="bar-row"><span>AI / Copilot</span><div class="bar"><i style="width:5.1%"></i></div><b>3</b></div>
+      <div class="note">Categories are inferred from service names for easier review.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Service inventory</h2>
+    <p class="note">Use search and filters to review all records. The “Raw” column contains the full original metadata for each service record.</p>
+    <div class="toolbar">
+      <input id="search" placeholder="Search service name, status, category, or details...">
+      <select id="enabledFilter"><option value="">All enabled states</option><option value="true">Enabled only</option><option value="false">Disabled only</option></select>
+      <select id="statusFilter"><option value="">All provisioning statuses</option><option>Not provisioned / off</option><option>Provisioned / ready</option><option>Provisioning in progress / pending</option><option>Provisioning issue</option></select>
+    </div>
+    <table id="services">
+      <thead>
+        <tr><th>#</th><th>Service / Feature</th><th>Category</th><th>Provisioning</th><th>Enabled</th><th>Modified</th><th>Detail</th><th>Raw</th></tr>
+      </thead>
+      <tbody>
+    <tr data-name="customer service historical analytics" data-category="Analytics" data-status="Provisioned / ready" data-enabled="true">
+      <td>1</td>
+      <td><strong>Customer Service historical analytics</strong><div class="sub">8fef4d92-fba9-ea11-a81c-000d3a6ce6ca</div></td>
+      <td>Analytics</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2026-07-06 21:26 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;940910515\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;4f715401-615f-45fe-bf38-fe439da2a1aa&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: -68806725,
+  &quot;modifiedon&quot;: &quot;2026-07-06T21:26:40Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:22:38Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Customer Service historical analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;871be16d-3f45-490c-8a7f-86d6daf67c8a&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-07-06T20:39:05Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2026-07-01T08:22:24Z&quot;,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;8fef4d92-fba9-ea11-a81c-000d3a6ce6ca&quot;,
+  &quot;versionnumber&quot;: 940910515,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2020-10-19T00:14:39Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: null,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="knowledge analytics" data-category="Knowledge" data-status="Not provisioned / off" data-enabled="false">
+      <td>2</td>
+      <td><strong>Knowledge analytics</strong><div class="sub">571301ad-fba9-ea11-a81c-000d3a6ce6ca</div></td>
+      <td>Knowledge</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-01-27 01:45 UTC</td>
+      <td>ErrorCode:None,StatusCode:NoUsage</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;787281735\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:NoUsage&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;224e19bf-5eea-4108-8c82-569dfd7e1763&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 1093468171,
+  &quot;modifiedon&quot;: &quot;2026-01-27T01:45:18Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:22:55Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Knowledge analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;43f2f92d-9a67-46cf-bceb-5d15612197b9&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2025-12-21T00:29:50Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2025-09-05T10:58:30Z&quot;,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;571301ad-fba9-ea11-a81c-000d3a6ce6ca&quot;,
+  &quot;versionnumber&quot;: 787281735,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2020-10-19T01:26:56Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: null,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>3</td>
+      <td><strong>Omnichannel historical analytics</strong><div class="sub">c7cb0a2e-38d2-ea11-a813-000d3a8ab15e</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:27 UTC</td>
+      <td>ErrorCode:None,StatusCode:NoUsage</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847243976\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:NoUsage&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;4c5a27b0-ec89-48b4-b65c-352ceff8aeb4&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 1296912007,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:27:58Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-23T15:13:17Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;31b8bf1d-354d-4e31-8844-8cece20193fb&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-03-23T19:08:50Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;c7cb0a2e-38d2-ea11-a813-000d3a8ab15e&quot;,
+  &quot;versionnumber&quot;: 847243976,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:08Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel real-time analytics" data-category="Omnichannel" data-status="Provisioned / ready" data-enabled="true">
+      <td>4</td>
+      <td><strong>Omnichannel real-time analytics</strong><div class="sub">e67a1ada-6c62-4b45-b758-0b246f32c1a5</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2026-03-30 06:37 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;851568672\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;c71a8fcc-efe2-414e-9129-47f07d3398e7&quot;,
+  &quot;utcconversiontimezonecode&quot;: 0,
+  &quot;msdyn_analyticschecksum&quot;: 1137459285,
+  &quot;modifiedon&quot;: &quot;2026-03-30T06:37:55Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-20T11:42:33Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel real-time analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;a452b95f-4726-46c0-b61f-650aa4607a9a&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-03-12T18:56:35Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2026-03-30T06:37:55Z&quot;,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;e67a1ada-6c62-4b45-b758-0b246f32c1a5&quot;,
+  &quot;versionnumber&quot;: 851568672,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics for bot" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>5</td>
+      <td><strong>Omnichannel historical analytics for Bot</strong><div class="sub">e6ae9ba0-7784-4646-9fff-0dfdf97b9737</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:08 UTC</td>
+      <td>ErrorCode:None,StatusCode:FeatureOff</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847235663\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:FeatureOff&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;444d1c6c-d809-4350-bd49-d23425695596&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: -2017852470,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:08:09Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-23T15:13:26Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics for Bot&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;c6e8fb90-12ea-47fd-9ceb-96975d1d4ef7&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-03-23T15:03:56Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2026-03-23T11:53:42Z&quot;,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;e6ae9ba0-7784-4646-9fff-0dfdf97b9737&quot;,
+  &quot;versionnumber&quot;: 847235663,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="qms case bulk evaluation" data-category="Quality / QMS" data-status="Provisioned / ready" data-enabled="true">
+      <td>6</td>
+      <td><strong>QMS Case Bulk Evaluation</strong><div class="sub">b1e2c3d4-5678-4abc-9def-1234567890ab</div></td>
+      <td>Quality / QMS</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2025-11-27 20:31 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;733558625\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;46610ca4-6f7d-412c-839d-a8edcf2c9d1b&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 506745570,
+  &quot;modifiedon&quot;: &quot;2025-11-27T20:31:47Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:22:03Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;QMS Case Bulk Evaluation&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;b8e2a3f1-4c6e-4e2d-9e8a-2f1c3a4b5d6e&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2025-11-27T20:31:46Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;b1e2c3d4-5678-4abc-9def-1234567890ab&quot;,
+  &quot;versionnumber&quot;: 733558625,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2025-10-02T18:24:16Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="[deprecated] case volume hourly forecasting" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>7</td>
+      <td><strong>[Deprecated] Case Volume Hourly Forecasting</strong><div class="sub">740edf2f-877a-4bfa-8785-1a08ae1899f9</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823242\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;48366452-1cc4-4e78-82ac-d34cf3a77c4b&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;[Deprecated] Case Volume Hourly Forecasting&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;fe4e37e8-b8fb-4c89-86b7-5f7bfccf806d&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;740edf2f-877a-4bfa-8785-1a08ae1899f9&quot;,
+  &quot;versionnumber&quot;: 258823242,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2022-04-17T23:44:13Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="qms conversation bulk evaluation" data-category="Quality / QMS" data-status="Not provisioned / off" data-enabled="false">
+      <td>8</td>
+      <td><strong>QMS Conversation Bulk Evaluation</strong><div class="sub">d2f3a4b5-6789-4cde-af01-2345678901bc</div></td>
+      <td>Quality / QMS</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-28 21:20 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;850507288\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;c21baecd-8cc1-4973-8da0-c59cb480cab3&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-03-28T21:20:13Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;QMS Conversation Bulk Evaluation&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;c7d4e5f6-8a9b-4c1d-ae2f-3b4c5d6e7f8a&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;d2f3a4b5-6789-4cde-af01-2345678901bc&quot;,
+  &quot;versionnumber&quot;: 850507288,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-03-28T21:20:13Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="kb keywords and description suggestion" data-category="Knowledge" data-status="Provisioned / ready" data-enabled="true">
+      <td>9</td>
+      <td><strong>KB Keywords and Description Suggestion</strong><div class="sub">f529900a-b213-4a92-9f02-27336fcbcfc2</div></td>
+      <td>Knowledge</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823213\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;2ea52764-173a-465e-b7ef-bf4c4d36f061&quot;,
+  &quot;utcconversiontimezonecode&quot;: 0,
+  &quot;msdyn_analyticschecksum&quot;: 1889096225,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;KB Keywords and Description Suggestion&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;1227a0d9-9606-4d66-8264-312dce1073ce&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2022-08-27T21:55:20Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;f529900a-b213-4a92-9f02-27336fcbcfc2&quot;,
+  &quot;versionnumber&quot;: 258823213,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2021-10-18T18:37:46Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="bring your own topics for cases" data-category="Other" data-status="Not provisioned / off" data-enabled="false">
+      <td>10</td>
+      <td><strong>Bring your own topics for cases</strong><div class="sub">5ec9de13-7533-4bc1-adac-27cab9934590</div></td>
+      <td>Other</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823258\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;e1682f1d-0bf5-4fde-8424-a6297acf6f10&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Bring your own topics for cases&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;62459d6e-2c09-4a4b-9a31-dfe2b1a4d9ab&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;5ec9de13-7533-4bc1-adac-27cab9934590&quot;,
+  &quot;versionnumber&quot;: 258823258,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2022-07-24T00:21:26Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics intent" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>11</td>
+      <td><strong>Omnichannel historical analytics intent</strong><div class="sub">e3a1c2b4-7d8e-4f9a-bc1e-2a3b4c5d6e7f</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-11-23 23:33 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;730778064\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;edd2c98a-ba24-4f1d-a03e-6a5066c2fc4a&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-11-23T23:33:57Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics intent&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;b2e2c3d6-5678-4abc-9def-1234567890ac&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;e3a1c2b4-7d8e-4f9a-bc1e-2a3b4c5d6e7f&quot;,
+  &quot;versionnumber&quot;: 730778064,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-11-23T23:33:57Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="kb suggestions" data-category="Knowledge" data-status="Provisioned / ready" data-enabled="true">
+      <td>12</td>
+      <td><strong>KB Suggestions</strong><div class="sub">fc5d5a26-e8c6-4feb-a441-2a471efbe350</div></td>
+      <td>Knowledge</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td>None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823179\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;5deb1ab2-797a-4ec6-ac84-323a3a61686b&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 1178422927,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2023-03-29T12:02:49Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;KB Suggestions&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;1203b148-1f86-40aa-ab3f-8e8ce1f5e63d&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2023-03-29T12:06:55Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;fc5d5a26-e8c6-4feb-a441-2a471efbe350&quot;,
+  &quot;versionnumber&quot;: 258823179,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2021-05-16T18:58:32Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: null,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="case volume daily forecasting" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>13</td>
+      <td><strong>Case Volume Daily Forecasting</strong><div class="sub">a5b16627-f430-4c44-8c44-3189e68743db</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-05-31 01:24 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;909192475\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;243ba00a-ff2d-4f1b-9676-cc11addbaf33&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 1994165000,
+  &quot;modifiedon&quot;: &quot;2026-05-31T01:24:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-12-16T12:20:16Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Case Volume Daily Forecasting&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;e8e57c0b-3381-4875-add3-685ef73b2526&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2025-12-16T12:31:07Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;a5b16627-f430-4c44-8c44-3189e68743db&quot;,
+  &quot;versionnumber&quot;: 909192475,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2022-04-17T23:44:13Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel real-time analytics for proactive engagement" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>14</td>
+      <td><strong>Omnichannel real-time analytics for Proactive Engagement</strong><div class="sub">855ff64a-0421-4a52-8e6a-39cc79146d7b</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-05 19:12 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;824936857\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;552434a3-7807-4f60-af40-b8e053511bc1&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-03-05T19:12:02Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel real-time analytics for Proactive Engagement&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;57d3cdbb-8868-4796-887c-528619fd5a6f&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;855ff64a-0421-4a52-8e6a-39cc79146d7b&quot;,
+  &quot;versionnumber&quot;: 824936857,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-03-05T19:12:02Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="real-time data model customization for customer service" data-category="Analytics" data-status="Provisioning issue" data-enabled="true">
+      <td>15</td>
+      <td><strong>Real-time data model customization for Customer Service</strong><div class="sub">09c168be-efe2-4f08-a986-3aab7095c863</div></td>
+      <td>Analytics</td>
+      <td><span class="badge warn">Provisioning issue</span><div class="sub">Code: 192350002</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2025-11-27 21:02 UTC</td>
+      <td>ErrorCode:ProvisionManagedPbiWorkspaceFailed</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;733579770\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:ProvisionManagedPbiWorkspaceFailed&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350002,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;0cba4853-c33b-457c-9dd0-ca93dbe48342&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: -1325172405,
+  &quot;modifiedon&quot;: &quot;2025-11-27T21:02:58Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:25:28Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Real-time data model customization for Customer Service&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;e34f8fe5-53f4-4956-a1a5-c402d092c4a8&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2025-11-27T21:02:57Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;09c168be-efe2-4f08-a986-3aab7095c863&quot;,
+  &quot;versionnumber&quot;: 733579770,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;5005002&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="intent based routing" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>16</td>
+      <td><strong>Intent Based Routing</strong><div class="sub">068fdcf7-f407-4818-87c3-4318b1c4dc98</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2023-12-17 00:59 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;305734836\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;5349ee0d-47e6-4b14-b2c2-92e8f341505e&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2023-12-17T00:59:22Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Intent Based Routing&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;FE551368-6A75-4748-AF57-1319593E39D1&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;068fdcf7-f407-4818-87c3-4318b1c4dc98&quot;,
+  &quot;versionnumber&quot;: 305734836,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2023-12-02T22:26:47Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel batch analytics" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>17</td>
+      <td><strong>Omnichannel batch analytics</strong><div class="sub">26e407e6-68ba-4b87-b084-472d58e1871d</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:08 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847235586\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;a49971d3-8678-4878-9019-841068d3480a&quot;,
+  &quot;utcconversiontimezonecode&quot;: 105,
+  &quot;msdyn_analyticschecksum&quot;: 702506633,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:08:08Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-23T15:13:24Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel batch analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;1e0793f9-e260-4ad6-ac7b-104fc8ccf1f6&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;26e407e6-68ba-4b87-b084-472d58e1871d&quot;,
+  &quot;versionnumber&quot;: 847235586,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics for voicemail" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>18</td>
+      <td><strong>Omnichannel historical analytics for Voicemail</strong><div class="sub">6eabc4dc-680f-40eb-a7bb-47eb93779ca2</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:08 UTC</td>
+      <td>ErrorCode:None,StatusCode:FeatureOff</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847235486\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:FeatureOff&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;f67be818-a772-4587-acd4-222f65595079&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 1647496978,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:08:07Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-12-16T12:19:00Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics for Voicemail&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;ff483be1-fbc2-4b40-851f-a3b3a898f2e3&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;6eabc4dc-680f-40eb-a7bb-47eb93779ca2&quot;,
+  &quot;versionnumber&quot;: 847235486,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="agent forecasting for conversations" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>19</td>
+      <td><strong>Agent Forecasting for Conversations</strong><div class="sub">826d47fb-74de-4b36-8bc0-4f3e82a07258</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-05-31 01:42 UTC</td>
+      <td>ErrorCode:None,StatusCode:NoUsage</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;909197357\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:NoUsage&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;fe8c87f2-d6db-4f57-9542-6835b9dbdab0&quot;,
+  &quot;utcconversiontimezonecode&quot;: 0,
+  &quot;msdyn_analyticschecksum&quot;: -2068443351,
+  &quot;modifiedon&quot;: &quot;2026-05-31T01:42:05Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:23:53Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Agent Forecasting for Conversations&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;c687f56c-b489-4525-87fc-33df77e29a30&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2025-12-03T00:29:58Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2026-03-31T21:23:40Z&quot;,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;826d47fb-74de-4b36-8bc0-4f3e82a07258&quot;,
+  &quot;versionnumber&quot;: 909197357,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="agent forecasting for cases" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>20</td>
+      <td><strong>Agent Forecasting for Cases</strong><div class="sub">14622c59-d408-4a1e-8f92-54a1f5184377</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-12-16 12:20 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;747266295\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;2f649a43-ed44-4b54-83ba-a8fafdb65cb7&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-12-16T12:20:29Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Agent Forecasting for Cases&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;d3153b61-80f0-4d20-be7c-13e75cf4ba12&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;14622c59-d408-4a1e-8f92-54a1f5184377&quot;,
+  &quot;versionnumber&quot;: 747266295,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2022-10-16T20:26:16Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="[deprecated] forecasting analytics for conversations" data-category="Forecasting" data-status="Provisioning in progress / pending" data-enabled="true">
+      <td>21</td>
+      <td><strong>[Deprecated] Forecasting analytics for conversations</strong><div class="sub">5d8bbbb7-7d34-4fca-8729-587294d73bfe</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge warn">Provisioning in progress / pending</span><div class="sub">Code: 192350003</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2025-11-27 20:23 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;733550375\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350003,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;da728b5f-f7db-458a-886c-3369a3142e70&quot;,
+  &quot;utcconversiontimezonecode&quot;: 105,
+  &quot;msdyn_analyticschecksum&quot;: 84067053,
+  &quot;modifiedon&quot;: &quot;2025-11-27T20:23:51Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:23:51Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;[Deprecated] Forecasting analytics for conversations&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;3d753f31-3acf-427c-9547-c7ab30f370f0&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;5d8bbbb7-7d34-4fca-8729-587294d73bfe&quot;,
+  &quot;versionnumber&quot;: 733550375,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="knowledge bulk harvesting" data-category="Knowledge" data-status="Not provisioned / off" data-enabled="false">
+      <td>22</td>
+      <td><strong>Knowledge Bulk Harvesting</strong><div class="sub">f67ac608-308c-4b0b-89a4-58c5b3df6a64</div></td>
+      <td>Knowledge</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-10-30 18:31 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;434463414\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;b0cafb94-830d-4d89-bfd0-771a4df15ea1&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-10-30T18:31:00Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Knowledge Bulk Harvesting&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;a6f0665c-3848-4955-aff8-d70982babffc&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;f67ac608-308c-4b0b-89a4-58c5b3df6a64&quot;,
+  &quot;versionnumber&quot;: 434463414,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-10-30T18:31:00Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="case processing agent analytics" data-category="AI / Copilot" data-status="Not provisioned / off" data-enabled="false">
+      <td>23</td>
+      <td><strong>Case processing agent analytics</strong><div class="sub">490b6636-8d34-449a-ada3-59996ddf70e4</div></td>
+      <td>AI / Copilot</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-11-23 23:28 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;730755942\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;5e91c705-ce00-40ce-899d-0a7be1a29cca&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-11-23T23:28:34Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Case processing agent analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;c1021c41-4e2f-4fd3-be01-d2ee41397d2e&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;490b6636-8d34-449a-ada3-59996ddf70e4&quot;,
+  &quot;versionnumber&quot;: 730755942,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-10-02T18:24:15Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="forecasting analytics for cases" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>24</td>
+      <td><strong>Forecasting analytics for cases</strong><div class="sub">34236ca5-f575-4e23-ac0d-5ca81f68f7c5</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-05-31 01:24 UTC</td>
+      <td>ErrorCode:None,StatusCode:NoUsage</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;909192585\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:NoUsage&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;4d15fc73-dfec-477e-81dd-dd6cd4430f6e&quot;,
+  &quot;utcconversiontimezonecode&quot;: 0,
+  &quot;msdyn_analyticschecksum&quot;: 499150119,
+  &quot;modifiedon&quot;: &quot;2026-05-31T01:24:54Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-12-16T12:20:11Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Forecasting analytics for cases&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;b5c49654-67bc-441c-b075-0aabd914e43f&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-01-06T16:30:45Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2026-03-31T21:23:17Z&quot;,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;34236ca5-f575-4e23-ac0d-5ca81f68f7c5&quot;,
+  &quot;versionnumber&quot;: 909192585,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2022-04-17T23:44:13Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="quick reply suggestions" data-category="Other" data-status="Not provisioned / off" data-enabled="false">
+      <td>25</td>
+      <td><strong>Quick Reply Suggestions</strong><div class="sub">34003478-3479-4ae8-824a-6237469fc208</div></td>
+      <td>Other</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227730\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;3a251c3f-c891-4530-b770-9e02fdd89bf7&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Quick Reply Suggestions&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;b4365a72-c523-47d1-8fa9-376061055f39&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;34003478-3479-4ae8-824a-6237469fc208&quot;,
+  &quot;versionnumber&quot;: 319227730,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="case suggestions" data-category="Other" data-status="Provisioned / ready" data-enabled="true">
+      <td>26</td>
+      <td><strong>Case Suggestions</strong><div class="sub">b0d7f44e-b949-4e2f-b0eb-62b5dcf4e76a</div></td>
+      <td>Other</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823171\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;f2326a8c-7049-46a8-96e9-0f895558c07b&quot;,
+  &quot;utcconversiontimezonecode&quot;: 0,
+  &quot;msdyn_analyticschecksum&quot;: -1756260795,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:51Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Case Suggestions&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;fffa6062-5f13-49ae-9785-f2d4016f5cd9&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2022-09-12T18:46:45Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;b0d7f44e-b949-4e2f-b0eb-62b5dcf4e76a&quot;,
+  &quot;versionnumber&quot;: 258823171,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2021-05-16T18:58:32Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: null,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics for advanced bot" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>27</td>
+      <td><strong>Omnichannel historical analytics for Advanced Bot</strong><div class="sub">2d3676a4-de41-41f9-8ce2-6a283580ad32</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-11-23 23:33 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;730778043\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;02f41c8c-8b6c-4bd9-b059-ca5f5aa7d0db&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-11-23T23:33:55Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics for Advanced Bot&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;0c749de7-093d-426d-9b6d-74e5b2870a15&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;2d3676a4-de41-41f9-8ce2-6a283580ad32&quot;,
+  &quot;versionnumber&quot;: 730778043,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-11-23T23:33:55Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics for authentication antifraud agent" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>28</td>
+      <td><strong>Omnichannel historical analytics for Authentication Antifraud Agent</strong><div class="sub">22d01ad4-c5d7-4f4b-8e8e-6a41a49f07a0</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-06-21 21:28 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;929448650\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;f982f978-d42d-4401-8ae2-337136c15c9c&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-06-21T21:28:19Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics for Authentication Antifraud Agent&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;187b0163-e9c7-4e3d-b6ef-f3c9af65d86c&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;22d01ad4-c5d7-4f4b-8e8e-6a41a49f07a0&quot;,
+  &quot;versionnumber&quot;: 929448650,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-06-21T21:28:19Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="ai generated conversation summary" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>29</td>
+      <td><strong>AI generated conversation summary</strong><div class="sub">fb4f865b-ee22-4d51-a8ed-6c782ef2aaa3</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227670\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;f1152ad6-5568-4597-894a-ae0f19d599fe&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;AI generated conversation summary&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;7188e1c3-0592-4178-a236-16b86a71513d&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;fb4f865b-ee22-4d51-a8ed-6c782ef2aaa3&quot;,
+  &quot;versionnumber&quot;: 319227670,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="sales usage telemetry analytics" data-category="Analytics" data-status="Provisioned / ready" data-enabled="true">
+      <td>30</td>
+      <td><strong>Sales Usage Telemetry Analytics</strong><div class="sub">110596a1-ca16-40e9-b288-6cd006ddaa2e</div></td>
+      <td>Analytics</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2026-02-03 15:12 UTC</td>
+      <td>ErrorCode:None,StatusCode:FeatureOff</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;794005698\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:FeatureOff&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;e37144b7-a6f3-4aac-800e-8c5909ae7ba0&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: -369049452,
+  &quot;modifiedon&quot;: &quot;2026-02-03T15:12:10Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Sales Usage Telemetry Analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;447b3f17-88c3-40f8-84f0-e3c4e67f4d2b&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2023-12-13T19:42:38Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2023-11-14T12:31:02Z&quot;,
+  &quot;solutionid&quot;: &quot;d2de215d-a9b8-44c0-b19b-7281d9ddca52&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;110596a1-ca16-40e9-b288-6cd006ddaa2e&quot;,
+  &quot;versionnumber&quot;: 794005698,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2022-03-12T22:30:13Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="sales acceleration analytics" data-category="Analytics" data-status="Not provisioned / off" data-enabled="false">
+      <td>31</td>
+      <td><strong>Sales Acceleration Analytics</strong><div class="sub">d685b422-3135-4884-930d-6dba8cbfa3c0</div></td>
+      <td>Analytics</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2023-12-01 23:54 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;297982111\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;8bc47512-545a-4186-a54b-2869bbb5ef95&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2023-12-01T23:54:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Sales Acceleration Analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;8ead1bf5-8bb9-4ad9-808e-31317eb3ce59&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f4458d65-4a99-45b4-a0f7-5b9ae02cfeed&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;d685b422-3135-4884-930d-6dba8cbfa3c0&quot;,
+  &quot;versionnumber&quot;: 297982111,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2022-01-08T21:57:08Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="historical analytics for unified routing" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>32</td>
+      <td><strong>Historical analytics for unified routing</strong><div class="sub">7d0e9742-ff53-4445-b825-7248392405ec</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-11-04 22:49 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;715818864\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;a854170e-cad3-45b4-bb65-80d4868463b7&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-11-04T22:49:18Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Historical analytics for unified routing&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;c33eea4b-6165-4455-9c7a-f0a68e6b8855&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;7d0e9742-ff53-4445-b825-7248392405ec&quot;,
+  &quot;versionnumber&quot;: 715818864,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2021-10-18T18:37:46Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="contact center voice analytics" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>33</td>
+      <td><strong>Contact Center voice analytics</strong><div class="sub">29066d55-2c0c-438a-8aea-75b93ba162c9</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-04-30 23:08 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;879198667\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;826d55f6-6630-47a6-84d0-0e40f44a6845&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-04-30T23:08:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Contact Center voice analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;d6840e30-3caa-40d3-81ed-cd68322671c3&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;29066d55-2c0c-438a-8aea-75b93ba162c9&quot;,
+  &quot;versionnumber&quot;: 879198667,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-04-12T19:21:43Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="ai generated conversation summary" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>34</td>
+      <td><strong>AI Generated Conversation Summary</strong><div class="sub">eacb4982-4023-47c8-b4f6-7d69ed997c03</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227722\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;f737d845-a099-4b67-902a-a4f3fdf7927e&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;AI Generated Conversation Summary&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;913c6c51-c896-45b4-a7ff-f31cf41a937d&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;eacb4982-4023-47c8-b4f6-7d69ed997c03&quot;,
+  &quot;versionnumber&quot;: 319227722,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="historical analytics for unified routing" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>35</td>
+      <td><strong>Historical analytics for unified routing</strong><div class="sub">f8d4455e-9b53-4142-8c09-81fd70e6986d</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:19 UTC</td>
+      <td>ErrorCode:None,StatusCode:FeatureOff</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847239220\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:FeatureOff&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;e984ff17-6ba9-49c0-b5eb-bf9b68a058d9&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 1769078498,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:19:10Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-23T15:13:23Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Historical analytics for unified routing&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;39960e1f-ae5f-4f3c-b587-3ba1e663e991&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-02-21T20:30:11Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;f8d4455e-9b53-4142-8c09-81fd70e6986d&quot;,
+  &quot;versionnumber&quot;: 847239220,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="data model customization for customer service" data-category="Analytics" data-status="Provisioning in progress / pending" data-enabled="true">
+      <td>36</td>
+      <td><strong>Data model customization for Customer Service</strong><div class="sub">f2266eb4-226f-4cf1-b422-89c5f48b40cb</div></td>
+      <td>Analytics</td>
+      <td><span class="badge warn">Provisioning in progress / pending</span><div class="sub">Code: 192350003</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2025-11-27 20:24 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;733553279\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350003,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;74afe6c6-0955-440b-ac06-2b1f845a052a&quot;,
+  &quot;utcconversiontimezonecode&quot;: 105,
+  &quot;msdyn_analyticschecksum&quot;: 1955554398,
+  &quot;modifiedon&quot;: &quot;2025-11-27T20:24:42Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:24:26Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Data model customization for Customer Service&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;710a92d2-743d-4930-b0eb-b4dded6fd9ec&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;f2266eb4-226f-4cf1-b422-89c5f48b40cb&quot;,
+  &quot;versionnumber&quot;: 733553279,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2022-10-16T20:26:16Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="quality evaluation agent analytics" data-category="Quality / QMS" data-status="Not provisioned / off" data-enabled="false">
+      <td>37</td>
+      <td><strong>Quality Evaluation Agent Analytics</strong><div class="sub">7f9e8d2c-4b1a-3f5e-9c6d-8a7b5e4f3c2d</div></td>
+      <td>Quality / QMS</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-28 21:18 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;850506535\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;327b3385-f7c6-4940-9156-7b4808fa0ac1&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-03-28T21:18:51Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Quality Evaluation Agent Analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;d2be10b6-07ef-4ea0-ada7-4af1e20ddc7e&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;7f9e8d2c-4b1a-3f5e-9c6d-8a7b5e4f3c2d&quot;,
+  &quot;versionnumber&quot;: 850506535,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-03-28T21:18:51Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="email sentiment analytics" data-category="AI / Copilot" data-status="Not provisioned / off" data-enabled="false">
+      <td>38</td>
+      <td><strong>Email sentiment analytics</strong><div class="sub">4879ae00-a997-4ee4-a863-8e14ce1354c1</div></td>
+      <td>AI / Copilot</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-01-19 23:09 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;467188367\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;594c3cf1-e4c5-4514-9078-913b40821224&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-01-19T23:09:47Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Email sentiment analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;ea119c34-029c-4dd8-8ac0-a7612f6d6d1b&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;4879ae00-a997-4ee4-a863-8e14ce1354c1&quot;,
+  &quot;versionnumber&quot;: 467188367,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-01-11T21:58:46Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="[deprecated] conversation volume hourly forecasting" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>39</td>
+      <td><strong>[Deprecated] Conversation Volume Hourly Forecasting</strong><div class="sub">00423c6f-c8ab-4f29-902c-93390500c1ae</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227698\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;375d452b-8c3a-4065-ac38-94734eb56c14&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;[Deprecated] Conversation Volume Hourly Forecasting&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;bf4833d2-1d1a-4915-a3a3-9e7946114de9&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;00423c6f-c8ab-4f29-902c-93390500c1ae&quot;,
+  &quot;versionnumber&quot;: 319227698,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel real-time analytics intent" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>40</td>
+      <td><strong>Omnichannel real-time analytics intent</strong><div class="sub">ccfcecee-79e3-42ba-ae56-937ed7971f7d</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-08-08 19:02 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;650314631\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;e60f0598-870d-40a6-8438-6ce9f3b6001a&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-08-08T19:02:26Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel real-time analytics intent&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;0a374793-a2bd-4a2a-b7c7-65db19a52538&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;ccfcecee-79e3-42ba-ae56-937ed7971f7d&quot;,
+  &quot;versionnumber&quot;: 650314631,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-08-08T19:02:26Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel call insights" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>41</td>
+      <td><strong>Omnichannel call insights</strong><div class="sub">9096e2e7-8751-4bd0-8087-9544179bcbe4</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:08 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847235435\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;cc48d4d2-bbec-4b50-af9b-5e696eb5e556&quot;,
+  &quot;utcconversiontimezonecode&quot;: 105,
+  &quot;msdyn_analyticschecksum&quot;: 1834814485,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:08:05Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-23T15:13:21Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel call insights&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;aa86f3b6-c363-40f6-b58e-c16bdcdb8f05&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;9096e2e7-8751-4bd0-8087-9544179bcbe4&quot;,
+  &quot;versionnumber&quot;: 847235435,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="ai generated conversation segmentation" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>42</td>
+      <td><strong>AI Generated Conversation Segmentation</strong><div class="sub">b0458d78-ea45-4152-b80e-95e6b0909b8b</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227714\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;86d937a1-7240-43dd-9b5c-36d9841c9869&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;AI Generated Conversation Segmentation&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;b0789667-90da-42e2-ba83-58228a1870ec&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;b0458d78-ea45-4152-b80e-95e6b0909b8b&quot;,
+  &quot;versionnumber&quot;: 319227714,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel real time sentiment" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>43</td>
+      <td><strong>Omnichannel real time sentiment</strong><div class="sub">489333ba-aefd-455f-9fb4-9b7094696a7b</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227644\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;fa0a50b0-e1db-466d-ae09-ddaa5409674e&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel real time sentiment&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;2cf26132-895b-4596-852d-4bc776b717d5&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;489333ba-aefd-455f-9fb4-9b7094696a7b&quot;,
+  &quot;versionnumber&quot;: 319227644,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="team expert suggestions for conversation" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>44</td>
+      <td><strong>Team Expert Suggestions for Conversation</strong><div class="sub">aac27455-925a-4609-86c7-a221606e902d</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227678\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;6f43427e-e9d3-45a6-8784-9cf946f9846e&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Team Expert Suggestions for Conversation&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;fbd3d07b-0a9f-41c8-b746-fe578c34219a&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;aac27455-925a-4609-86c7-a221606e902d&quot;,
+  &quot;versionnumber&quot;: 319227678,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="real-time analytics for record routing" data-category="Omnichannel" data-status="Provisioned / ready" data-enabled="true">
+      <td>45</td>
+      <td><strong>Real-time analytics for record routing</strong><div class="sub">7c2946dd-7694-4587-8c67-a3c8849278e9</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2026-03-12 18:59 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;834799130\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;2f30f882-8990-4bd4-bd5a-21e68dfb42e3&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 96275094,
+  &quot;modifiedon&quot;: &quot;2026-03-12T18:59:04Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-28T19:15:30Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Real-time analytics for record routing&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;4e59fb01-ff5c-4e78-ba72-7165ba1ea7bf&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-03-12T18:59:04Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;7c2946dd-7694-4587-8c67-a3c8849278e9&quot;,
+  &quot;versionnumber&quot;: 834799130,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2024-10-15T00:27:03Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="kb extraction ai for copilot" data-category="Knowledge" data-status="Not provisioned / off" data-enabled="false">
+      <td>46</td>
+      <td><strong>KB Extraction AI for Copilot</strong><div class="sub">ed1921d2-7b97-49ed-bce3-a5bbde378605</div></td>
+      <td>Knowledge</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823224\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;e6f58f77-bf47-4615-a7ec-d48454b96eb0&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;KB Extraction AI for Copilot&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;252e2145-e545-455e-b996-863cfba03ebc&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;ed1921d2-7b97-49ed-bce3-a5bbde378605&quot;,
+  &quot;versionnumber&quot;: 258823224,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2023-05-20T02:20:17Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="team expert suggestions" data-category="Other" data-status="Provisioned / ready" data-enabled="true">
+      <td>47</td>
+      <td><strong>Team Expert Suggestions</strong><div class="sub">afccf919-eae9-4d30-8380-a5d4b821bdf5</div></td>
+      <td>Other</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2023-08-19 01:30 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;258823190\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;90f47c59-359f-4b4a-a195-cba89e6f962d&quot;,
+  &quot;utcconversiontimezonecode&quot;: 0,
+  &quot;msdyn_analyticschecksum&quot;: -922556803,
+  &quot;modifiedon&quot;: &quot;2023-08-19T01:30:52Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 0,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Team Expert Suggestions&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;a5cc1218-c776-4b3c-81f5-6e208c858d09&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2022-11-02T00:56:08Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;afccf919-eae9-4d30-8380-a5d4b821bdf5&quot;,
+  &quot;versionnumber&quot;: 258823190,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2021-10-18T18:37:46Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: null,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="bring your own topics for conversations" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>48</td>
+      <td><strong>Bring your own topics for Conversations</strong><div class="sub">a17726cf-e1ba-41bd-b165-b4eea1f01d85</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-01-27 20:07 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;319227738\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;2901bf9b-b4b1-4131-867c-bf1c958cfdfa&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Bring your own topics for Conversations&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;e17b3c78-9f44-4164-8283-51dd828cc461&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;a17726cf-e1ba-41bd-b165-b4eea1f01d85&quot;,
+  &quot;versionnumber&quot;: 319227738,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:10Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="conversation knowledge bulk harvesting" data-category="Knowledge" data-status="Not provisioned / off" data-enabled="false">
+      <td>49</td>
+      <td><strong>Conversation Knowledge Bulk Harvesting</strong><div class="sub">b7f422c9-ea1a-4f56-a6e0-d6859af93b36</div></td>
+      <td>Knowledge</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-05-26 22:44 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;574315924\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;d4bc9534-b391-4a04-b32e-92e739c05a35&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-05-26T22:44:00Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Conversation Knowledge Bulk Harvesting&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;89080bb5-70c9-4e2d-ae84-ba3f25fdbcf6&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;b7f422c9-ea1a-4f56-a6e0-d6859af93b36&quot;,
+  &quot;versionnumber&quot;: 574315924,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-05-26T22:44:00Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel real-time analytics persistent chat" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>50</td>
+      <td><strong>Omnichannel real-time analytics persistent chat</strong><div class="sub">7459d485-4cba-47b1-a230-d7668e80a5f9</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-02-01 19:18 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;792371892\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;b128fb92-f296-48e8-8a3a-97ef24483d4c&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-02-01T19:18:23Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel real-time analytics persistent chat&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;00025e05-1ed5-46f9-9285-4ada26e46e50&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;7459d485-4cba-47b1-a230-d7668e80a5f9&quot;,
+  &quot;versionnumber&quot;: 792371892,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-12-15T19:25:28Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics for proactive outbound" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>51</td>
+      <td><strong>Omnichannel historical analytics for Proactive Outbound</strong><div class="sub">be827bf5-f9f9-46aa-a150-d81bcbe8c8e1</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-11-23 23:33 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;730778055\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;b4697cc6-20e9-4e1f-9c28-5673245ac0cd&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-11-23T23:33:56Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics for Proactive Outbound&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;8cac421f-000d-4111-8467-b2b2a183f334&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;be827bf5-f9f9-46aa-a150-d81bcbe8c8e1&quot;,
+  &quot;versionnumber&quot;: 730778055,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-10-02T18:26:05Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="contact center bot analytics" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>52</td>
+      <td><strong>Contact Center bot analytics</strong><div class="sub">0bcbedf3-3315-4ad3-ad17-d8aacc7de960</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-04-30 23:08 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;879198675\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;59d089dc-ca42-4869-8231-3888149532d2&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-04-30T23:08:53Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Contact Center bot analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;d50e09a7-bcf6-4309-999a-dc44b6400f0e&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;0bcbedf3-3315-4ad3-ad17-d8aacc7de960&quot;,
+  &quot;versionnumber&quot;: 879198675,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-04-12T19:21:43Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="analytics and insights for customer engagement" data-category="Analytics" data-status="Not provisioned / off" data-enabled="false">
+      <td>53</td>
+      <td><strong>Analytics and Insights for Customer Engagement</strong><div class="sub">e752f626-630c-4f72-ab1c-de2c6607cd4c</div></td>
+      <td>Analytics</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2024-04-16 08:35 UTC</td>
+      <td>ErrorCode:None,StatusCode:FeatureOff</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;349641665\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:FeatureOff&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: null,
+  &quot;componentidunique&quot;: &quot;31cddd51-5127-4aab-831a-d5e280971852&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 287057790,
+  &quot;modifiedon&quot;: &quot;2024-04-16T08:35:12Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Analytics and Insights for Customer Engagement&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;f5ffd428-915b-4c05-b6d6-b09299dcce03&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2023-10-17T11:33:20Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2023-10-06T12:13:51Z&quot;,
+  &quot;solutionid&quot;: &quot;72fef991-4000-4868-b025-ebbe31b0bf91&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;e752f626-630c-4f72-ab1c-de2c6607cd4c&quot;,
+  &quot;versionnumber&quot;: 349641665,
+  &quot;msdyn_datasourcemode&quot;: null,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2021-10-12T13:59:28Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel real-time analytics bot" data-category="Omnichannel" data-status="Provisioned / ready" data-enabled="true">
+      <td>54</td>
+      <td><strong>Omnichannel real-time analytics bot</strong><div class="sub">2ebd21bc-94a3-433c-b76a-dea95f161d3d</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2026-03-12 18:57 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;834798985\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;6489481a-7c40-40e0-a46d-f59cb842b993&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 17615516,
+  &quot;modifiedon&quot;: &quot;2026-03-12T18:57:45Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-20T11:42:34Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel real-time analytics bot&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;7c673293-82d3-4701-8781-3a8fd9a9ef5e&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-03-12T18:57:45Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;2ebd21bc-94a3-433c-b76a-dea95f161d3d&quot;,
+  &quot;versionnumber&quot;: 834798985,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2024-12-15T19:25:29Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="copilot analytics" data-category="AI / Copilot" data-status="Provisioned / ready" data-enabled="true">
+      <td>55</td>
+      <td><strong>Copilot analytics</strong><div class="sub">435b99cc-ec86-4b26-a2d2-ec7f1334e99c</div></td>
+      <td>AI / Copilot</td>
+      <td><span class="badge ok">Provisioned / ready</span><div class="sub">Code: 192350000</div></td>
+      <td><span class="badge ok">Enabled</span></td>
+      <td>2026-07-06 21:26 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;940910504\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350000,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;54542d6c-4c11-4f74-973b-96bcee8d9a66&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: -817850002,
+  &quot;modifiedon&quot;: &quot;2026-07-06T21:26:38Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:26:08Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Copilot analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;86A76A15-555F-4CAF-AFFC-D9AD7C1B6884&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-07-06T15:10:17Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: &quot;2026-03-31T21:24:01Z&quot;,
+  &quot;solutionid&quot;: &quot;b7c57d65-8db3-45d4-94c6-108fca5dd4d5&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;435b99cc-ec86-4b26-a2d2-ec7f1334e99c&quot;,
+  &quot;versionnumber&quot;: 940910504,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: true,
+  &quot;createdon&quot;: &quot;2023-05-27T23:02:16Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="omnichannel historical analytics for voice" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>56</td>
+      <td><strong>Omnichannel historical analytics for voice</strong><div class="sub">91174517-fd95-4541-bca5-eeed468c0ec6</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-03-24 21:27 UTC</td>
+      <td>ErrorCode:None,StatusCode:NoUsage</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;847243971\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:NoUsage&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;eac1e320-4276-4546-a434-4a5209e68e6a&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: 538084332,
+  &quot;modifiedon&quot;: &quot;2026-03-24T21:27:57Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2026-01-23T15:13:20Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Omnichannel historical analytics for voice&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;86fa7a58-a250-461a-a7b8-c1b9153b85fe&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2026-03-23T15:32:28Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;91174517-fd95-4541-bca5-eeed468c0ec6&quot;,
+  &quot;versionnumber&quot;: 847243971,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="conversation volume daily forecasting" data-category="Forecasting" data-status="Not provisioned / off" data-enabled="false">
+      <td>57</td>
+      <td><strong>Conversation Volume Daily Forecasting</strong><div class="sub">dcecd1fb-7a1f-4a27-88fa-f6d1a56e7093</div></td>
+      <td>Forecasting</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-05-31 01:42 UTC</td>
+      <td>ErrorCode:None,StatusCode:None</td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;909197354\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: &quot;ErrorCode:None,StatusCode:None&quot;,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: false,
+  &quot;componentidunique&quot;: &quot;88bec3a0-03bc-499a-87f7-24e3bf978a97&quot;,
+  &quot;utcconversiontimezonecode&quot;: 92,
+  &quot;msdyn_analyticschecksum&quot;: -1702657041,
+  &quot;modifiedon&quot;: &quot;2026-05-31T01:42:04Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: &quot;2025-11-27T20:23:54Z&quot;,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: 4,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Conversation Volume Daily Forecasting&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;caff7244-fec4-4e15-929d-6b3d5dc2e3ee&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: &quot;2025-11-27T20:46:55Z&quot;,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;dcecd1fb-7a1f-4a27-88fa-f6d1a56e7093&quot;,
+  &quot;versionnumber&quot;: 909197354,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2024-01-27T20:07:09Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: &quot;0&quot;,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="real-time analytics for intent based record routing" data-category="Omnichannel" data-status="Not provisioned / off" data-enabled="false">
+      <td>58</td>
+      <td><strong>Real-time analytics for intent based record routing</strong><div class="sub">5865fc50-dd66-40c9-9e05-fd52fc67301a</div></td>
+      <td>Omnichannel</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2025-08-08 19:00 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;650314055\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;d09e440d-e318-479a-9753-4bace2f05f12&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2025-08-08T19:00:56Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Real-time analytics for intent based record routing&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;f6433796-66d9-4b33-ae73-f547869154d8&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;f1d52683-0fac-46ea-807f-24d75b90e6d4&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;5865fc50-dd66-40c9-9e05-fd52fc67301a&quot;,
+  &quot;versionnumber&quot;: 650314055,
+  &quot;msdyn_datasourcemode&quot;: 487460001,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2025-08-08T19:00:56Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+    <tr data-name="contact center historical analytics" data-category="Analytics" data-status="Not provisioned / off" data-enabled="false">
+      <td>59</td>
+      <td><strong>Contact Center historical analytics</strong><div class="sub">669cb3ab-6cd6-4641-8707-fd8714cb4e32</div></td>
+      <td>Analytics</td>
+      <td><span class="badge off">Not provisioned / off</span><div class="sub">Code: 192350001</div></td>
+      <td><span class="badge off">Disabled</span></td>
+      <td>2026-04-30 23:08 UTC</td>
+      <td></td>
+      <td><details><summary>View</summary><pre>{
+  &quot;@odata.etag&quot;: &quot;W/\&quot;879198655\&quot;&quot;,
+  &quot;msdyn_provisionstatusdetail&quot;: null,
+  &quot;msdyn_provisionsubstatus&quot;: null,
+  &quot;msdyn_provisionstatus&quot;: 192350001,
+  &quot;msdyn_schedule&quot;: null,
+  &quot;statuscode&quot;: 1,
+  &quot;msdyn_iscustomizationsupported&quot;: true,
+  &quot;componentidunique&quot;: &quot;740fffeb-ae8c-4a9d-aa5b-76292800606e&quot;,
+  &quot;utcconversiontimezonecode&quot;: null,
+  &quot;msdyn_analyticschecksum&quot;: null,
+  &quot;modifiedon&quot;: &quot;2026-04-30T23:08:49Z&quot;,
+  &quot;msdyn_lastprovisionsenttime&quot;: null,
+  &quot;msdyn_timezonecode&quot;: null,
+  &quot;overwritetime&quot;: &quot;1900-01-01T00:00:00Z&quot;,
+  &quot;timezoneruleversionnumber&quot;: null,
+  &quot;importsequencenumber&quot;: null,
+  &quot;msdyn_name&quot;: &quot;Contact Center historical analytics&quot;,
+  &quot;statecode&quot;: 0,
+  &quot;msdyn_templateid&quot;: &quot;0b534f73-e944-42af-8686-7be19ec54a7a&quot;,
+  &quot;ismanaged&quot;: true,
+  &quot;msdyn_lastreportrefreshtime&quot;: null,
+  &quot;msdyn_lastaccesstime&quot;: null,
+  &quot;solutionid&quot;: &quot;72437d72-1e26-4134-abad-10b08e48c96d&quot;,
+  &quot;overriddencreatedon&quot;: null,
+  &quot;componentstate&quot;: 0,
+  &quot;msdyn_datainsightsandanalyticsfeatureid&quot;: &quot;669cb3ab-6cd6-4641-8707-fd8714cb4e32&quot;,
+  &quot;versionnumber&quot;: 879198655,
+  &quot;msdyn_datasourcemode&quot;: 487460000,
+  &quot;msdyn_isenabled&quot;: false,
+  &quot;createdon&quot;: &quot;2026-04-12T19:21:42Z&quot;,
+  &quot;msdyn_provisionerrorcode&quot;: null,
+  &quot;msdyn_reporttype&quot;: 192350000,
+  &quot;msdyn_isdemoenabled&quot;: false,
+  &quot;iscustomizable&quot;: {
+    &quot;Value&quot;: false,
+    &quot;CanBeChanged&quot;: true,
+    &quot;ManagedPropertyLogicalName&quot;: &quot;iscustomizableanddeletable&quot;
+  }
+}</pre></details></td>
+    </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<script>
+const search = document.getElementById('search');
+const enabledFilter = document.getElementById('enabledFilter');
+const statusFilter = document.getElementById('statusFilter');
+const rows = [...document.querySelectorAll('#services tbody tr')];
+function filterRows() {
+  const q = search.value.toLowerCase();
+  const enabled = enabledFilter.value;
+  const status = statusFilter.value;
+  rows.forEach(row => {
+    const hay = row.innerText.toLowerCase();
+    const matchText = !q || hay.includes(q);
+    const matchEnabled = !enabled || row.dataset.enabled === enabled;
+    const matchStatus = !status || row.dataset.status === status;
+    row.style.display = (matchText && matchEnabled && matchStatus) ? '' : 'none';
+  });
+}
+[search, enabledFilter, statusFilter].forEach(el => el.addEventListener('input', filterRows));
+</script>
+</body>
+</html>
